@@ -28,7 +28,7 @@ For our final project, we would like to analyze data from well-known networking 
 
 ……and many more.
 
-## Proposed Solution and Datasets
+## Datasets
 
 To build our interactive visualization, we will rely on the below datasets created by web scraping job listings from Glassdoor and Indeed. Our interactive visualizations on the above questions would help Data Science aspirants scout the U.S. job market and enable them to find the best job opportunities. We also plan to build a personalized job recommendation feature in our application that can analyze the user's skills, professional experience, location, and salary preferences and suggest roles satisfying their requirements. This application has the potential to guide Data Science aspirants towards applying fulfilling jobs and ensure a satisfying professional work experience.
 
