@@ -122,7 +122,7 @@ Through this visualization, we will show the most sought-after skills based on i
 
 Data Analysis: Sample data to use for visualization
 
-![user dashboard pic](./pics/skill_da.jpg)
+![skill da pic](./pics/skill_da.png)
 
 * **Companies with HQ locations**
 
@@ -140,7 +140,7 @@ Apart from the US country/state map, we will display a drop-down with high-level
 
 We will also provide the user an option to upload their resume to check if their resume can match the job description for the role selected. We will display a percentage match score and recommend words to add to their resume to improve their chances of being shortlisted by recruiters at the company.
 
-![user dashboard pic](./pics/user_dashboatrd.png)
+![user dashboard pic](./pics/user_dashboard.png)
 
 **Data Analysis:**
 
@@ -148,18 +148,9 @@ Job Description extracted from our dataset can be used to extract important key-
 
 Key-word extraction using Spacy
 
-![Spacy pic](./pics/key_word_extract.PNG)
+![Spacy pic](./pics/key_word_etract.PNG)
 
 
 Key-phrase extraction using NLTK
 
 ![NLTK pic](./pics/key_phrase_extract.PNG)
-
-
-
-
-
-
-
-
-
