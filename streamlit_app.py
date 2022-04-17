@@ -5,7 +5,7 @@ import streamlit as st
 
 @st.cache
 def load_data():
-    data = pd.read_csv("https://corgis-edu.github.io/corgis/datasets/csv/graduates/graduates.csv")
+    data = pd.read_csv("https://raw.githubusercontent.com/CMU-IDS-2022/final-project-thescientists/main/datasets/DataScientiestsSalaries2021.csv")
     return data
 
 
