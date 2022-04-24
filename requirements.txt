@@ -1,1 +1,3 @@
 st-annotated-text
+vega_datasets
+pdfplumber
