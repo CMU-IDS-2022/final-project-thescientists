@@ -1,0 +1,18 @@
+{
+"Python" : "Python",
+"Apache Spark" : "spark",
+"AWS" : "aws",
+"MS Excel" : "excel",
+"SQL" : "sql",
+"SAS" : "sas",
+"Keras" : "keras",
+"PyTorch" : "pytorch",
+"SciKit" : "scikit",
+"Tensorflow" : "tensor",
+"Hadoop" : "hadoop",
+"Tableau" : "tableau",
+"Power BI" : "bi",
+"Apache Flink" : "flink",
+"MongoDB" : "mongo",
+"Google Analytics" : "google_an"
+}
