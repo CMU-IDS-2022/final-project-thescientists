@@ -152,7 +152,7 @@ elif add_selectbox == 'Job Recommendation Dashboard':
     @st.cache
     # file and code referenced from: https://gist.github.com/rogerallen/1583593
     def get_state_code_dict():
-        with open('states_to_codes.txt') as f:
+        with open('/app/final-project-thescientists/datasets/dicts/states_to_codes.txt') as f:
             text_data = f.read()
 
         dictionary = json.loads(text_data)
@@ -162,7 +162,7 @@ elif add_selectbox == 'Job Recommendation Dashboard':
 
     @st.cache
     def get_state_fips():
-        with open('state_to_fips.txt') as f:
+        with open('/app/final-project-thescientists/datasets/dicts/state_to_fips.txt') as f:
             text_data = f.read()
 
         dictionary = json.loads(text_data)
@@ -171,7 +171,7 @@ elif add_selectbox == 'Job Recommendation Dashboard':
 
     @st.cache
     def get_skill_col_dict():
-        with open('skillname_to_column.txt') as f:
+        with open('/app/final-project-thescientists/datasets/dicts/skillname_to_column.txt') as f:
             text_data = f.read()
 
         dictionary = json.loads(text_data)
