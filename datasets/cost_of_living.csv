@@ -1,0 +1,52 @@
+﻿State,id,cost_of_living_index
+Alabama,1,87.9
+Alaska,2,127.1
+Arizona,4,103.2
+Arkansas,5,90.9
+California,6,142.2
+Colorado,8,105.3
+Connecticut,9,121.6
+Delaware,10,107.9
+Florida,12,100.3
+Georgia,13,88.8
+Hawaii,15,193.3
+Idaho,16,102.1
+Illinois,17,94.3
+Indiana,18,90.6
+Iowa,19,89.9
+Kansas,20,86.5
+Kentucky,21,93.1
+Louisiana,22,93
+Maine,23,115
+Maryland,24,124
+Massachusetts,25,135
+Michigan,26,91.3
+Minnesota,27,100
+Mississippi,28,83.3
+Missouri,29,89.8
+Montana,30,100.7
+Nebraska,31,93.7
+Nevada,32,106.3
+New Hampshire,33,109.9
+New Jersey,34,115.2
+New Mexico,35,91
+New York,36,148.2
+North Carolina,37,95.7
+North Dakota,38,98.2
+Ohio,39,91.3
+Oklahoma,40,87.9
+Oregon,41,130.1
+Pennsylvania,42,102.5
+Rhode Island,44,117.2
+South Carolina,45,93.6
+South Dakota,46,101
+Tennessee,47,89
+Texas,48,92.1
+Utah,49,99
+Vermont,50,117
+Virginia,51,101.8
+Washington,53,111.6
+West Virginia,54,90.5
+Wisconsin,55,96.4
+Wyoming,56,94.3
+District of Columbia ,11,158.1
