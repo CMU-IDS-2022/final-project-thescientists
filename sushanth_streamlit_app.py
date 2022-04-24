@@ -53,14 +53,12 @@ elif add_selectbox == 'Industry and Company visualizations':
 
 elif add_selectbox == 'Job Recommendation Dashboard':
     ####################################################################################################################
-    # Google API
-    api_key = "AIzaSyBOZHZGEENiTf07_MvnS3gQ3uyCFKzHg_U"
-    client_id = "0o4dtm0b55wk5o5b"
-    secret = "fKqeC4uG"
-
 
     def get_emi_api_token():
         url = "https://auth.emsicloud.com/connect/token"
+        
+        client_id = st.secrets['client_id']
+        secret = st.secrets['secret']
 
         payload = "client_id=" + client_id + "&client_secret=" + secret + "&grant_type=client_credentials&scope=emsi_open"
         headers = {'Content-Type': 'application/x-www-form-urlencoded'}
@@ -180,6 +178,7 @@ elif add_selectbox == 'Job Recommendation Dashboard':
 
     def extract_lat_lng(address_or_postalcode, data_type='json'):
         endpoint = f"https://maps.googleapis.com/maps/api/geocode/{data_type}"
+        api_key = st.secrets["api_key"]
         params = {"address": address_or_postalcode, "key": api_key}
         url_params = urlencode(params)
         url = f"{endpoint}?{url_params}"
