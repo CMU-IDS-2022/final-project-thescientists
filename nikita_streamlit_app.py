@@ -83,7 +83,7 @@ elif add_selectbox == 'Industry and Company visualizations':
 
     # CHART 2 - grouped salaries, industry wise
     with st.spinner(text="Loading data..."):
-        df2 = load_data("https://github.com/CMU-IDS-2022/final-project-thescientists/blob/main/datasets/DataScientiestsSalaries2021Cleaned.csv")
+        df2 = load_data("https://raw.githubusercontent.com/CMU-IDS-2022/final-project-thescientists/main/datasets/DataScientiestsSalaries2021Cleaned.csv")
     st.header("Data Roles Salaries in the US")
 
     # REFERENCE - https://stackoverflow.com/questions/62315591/altair-select-all-values-when-using-binding-select
