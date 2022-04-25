@@ -101,7 +101,7 @@ elif add_selectbox == 'Industry and Company visualizations':
     
     top_industries=alt.Chart(long_form[long_form.required==1].iloc[:,:-1]).transform_filter(brush).encode(
         x=alt.X('Industry:N',
-                sort=alt.SortField(field='mean_sal', order='descending'))
+                sort=alt.SortField(field='mean_sal', order='descending'), axis=alt.Axis(labelAngle=-30))
     ).transform_aggregate(
         count='count()',
         mean_sal='mean(Avg Salary(K)):Q',
@@ -111,7 +111,7 @@ elif add_selectbox == 'Industry and Company visualizations':
     ).transform_window(
         window=[{'op': 'rank', 'as': 'rank'}],
         sort=[{'field': 'mean_sal', 'order': 'descending'}]
-    ).transform_filter(('datum.rank <= 20'))
+    ).transform_filter(('datum.rank <= 15'))
     
 
     selection = alt.selection_single(fields=['Industry'], nearest=True, 
@@ -274,7 +274,7 @@ elif add_selectbox == 'Industry and Company visualizations':
         size="independent",
         y = 'independent'
     ).properties(
-        title=alt.TitleParams(text='Top 20 industries by Average Salary', align='center',fontSize=20,
+        title=alt.TitleParams(text='Top 15 industries by Average Salary', align='center',fontSize=20,
                               subtitle='Mean of Average, Maximum and Minimum'),
         width=450,
         height=400
