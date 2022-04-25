@@ -274,7 +274,8 @@ elif add_selectbox == 'Industry and Company visualizations':
         size="independent",
         y = 'independent'
     ).properties(
-        title=alt.TitleParams(text='Average Salary of top 20 industries', align='center',fontSize=20),
+        title=alt.TitleParams(text='Top 20 industries by Average Salary', align='center',fontSize=20,
+                              subtitle='Mean of Average, Maximum and Minimum'),
         width=450,
         height=400
     )+top_industries_text).resolve_scale(
