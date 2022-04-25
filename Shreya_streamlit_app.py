@@ -184,12 +184,11 @@ if add_selectbox == 'US Data Science Jobs visualizations':
           
     st.header("Interactive Graph")
     if st.checkbox('Show the graph role count '):  
-        st.write('The graph has been colored according to the Maximum Salary offered in various states. Feel free to choose the company name along with the job type to see various combinations of availability')
+        st.write('The graph has been colored according to the Maximum Salary offered in various states. Feel free to choose the company name along with the job type to see various combinations of availability. Choose both All in the dropdown to see all the points on the map.')
         
         job_type = list(jobs['Job_Type'].unique())  + [None]
         
         company_names = list(jobs['Company'].unique()) + [None]
-        st.write(company_names)
         #company_names.insert(1, 'All')
                     
        # input_dropdown_job = alt.binding_select(options=job_type, name='Job Type')
