@@ -124,9 +124,10 @@ elif add_selectbox == 'Industry and Company visualizations':
     ).add_selection(selection)
     
 
-    error_bar=top_industries.mark_errorbar(opacity=0.4, color='lightgreen').encode(
+    error_bar=top_industries.mark_errorbar(opacity=0.4, color='darkgreen').encode(
     alt.Y('max_sal:Q', 
-          axis=alt.Axis(title='Salary difference (in $1000)',domain=False, tickSize=0, labelPadding=0, format='.0f'),scale=alt.Scale(zero=False)),
+          axis=alt.Axis(title='Salary difference (in $1000)',domain=False,
+                        tickSize=0, labelPadding=3, format='.0f'),scale=alt.Scale(zero=False)),
     alt.Y2('min_sal:Q'),
     strokeWidth=alt.value(2)
     )
@@ -141,10 +142,12 @@ elif add_selectbox == 'Industry and Company visualizations':
         fontSize=10,
         align='center',
         baseline='middle',
-        dy=-5,
-        dx=10
+        dy=-10,
+        dx=15
     ).encode(
-        text=alt.Text('mean_sal:Q',format='.0f')
+        text=alt.Text('mean_sal1:N')
+    ).transform_calculate(
+        mean_sal1="round(datum.mean_sal) + 'K'"
     )
 
     
@@ -164,29 +167,50 @@ elif add_selectbox == 'Industry and Company visualizations':
         
     )
         
-    avg_salary=base.mark_text().encode(
-        text=alt.Text('mean(avg_salary):Q', format='.2f'),
-        size=alt.Size('mean(avg_salary):Q',legend=None)
-    ).transform_filter(brush).transform_aggregate(groupby=["s_no"], avg_salary="mean(Avg Salary(K))").properties(
+    avg_salary=base.mark_text(fontSize=35).encode(
+        text=alt.Text('avg_text:N')
+    ).transform_filter(brush).transform_aggregate(
+        groupby=["s_no"], 
+        avg_salary="mean(Avg Salary(K))"
+    ).transform_aggregate(
+        groupby=[],
+        avg_salary1='mean(avg_salary)'
+    ).transform_calculate(
+        avg_text="round(datum.avg_salary1) + 'K'"
+    ).properties(
         title=alt.TitleParams(['Average salary (K):'],fontSize=20),
         width=40,
         height=40
     )
             
         
-    lower_salary=base.mark_text().encode(
-        text=alt.Text('mean(lower_salary):Q', format='.2f'),
-        size=alt.Size('mean(lower_salary):Q',legend=None)
-    ).transform_filter(brush).transform_aggregate(groupby=["s_no"], lower_salary="mean(Lower Salary)").properties(
+    lower_salary=base.mark_text(fontSize=35).encode(
+        text=alt.Text('low_text:N')
+    ).transform_filter(brush).transform_aggregate(
+        groupby=["s_no"], 
+        lower_salary="mean(Lower Salary)"
+    ).transform_aggregate(
+        groupby=[],
+        low_salary='mean(lower_salary)'
+    ).transform_calculate(
+        low_text="round(datum.low_salary) + 'K'"
+    ).properties(
         title=alt.TitleParams(['Minimum salary (K):'],fontSize=20),
         width=40,
         height=40
     )
         
-    upper_salary=base.mark_text().encode(
-        text=alt.Text('mean(upper_salary):Q', format='.2f'),
-        size=alt.Size('mean(upper_salary):Q',legend=None)
-    ).transform_filter(brush).transform_aggregate(groupby=["s_no"], upper_salary="mean(Upper Salary)").properties(
+    upper_salary=base.mark_text(fontSize=35).encode(
+        text=alt.Text('up_text:N'),
+    ).transform_filter(brush).transform_aggregate(
+        groupby=["s_no"], 
+        upper_salary="mean(Upper Salary)"
+    ).transform_aggregate(
+        groupby=[],
+        up_salary='mean(upper_salary)'
+    ).transform_calculate(
+        up_text="round(datum.up_salary) + 'K'"
+    ).properties(
         title=alt.TitleParams(['Maximum salary (K):'],fontSize=20),
         width=40,
         height=40
@@ -229,7 +253,9 @@ elif add_selectbox == 'Industry and Company visualizations':
     ind = ranked_text.encode(text='rank:O').properties(title=alt.TitleParams(text='Rank', align='left'))
     job_title = ranked_text.encode(text='job_title:N').properties(title=alt.TitleParams(text='Job Title', align='left'))
     company = ranked_text.encode(text='company:N').properties(title=alt.TitleParams(text='Company Name & Rating', align='left'))
-    avg_s=ranked_text.encode(text='avg:N').properties(title=alt.TitleParams(text='Avg Salary', align='left'))
+    avg_s=ranked_text.encode(text='avg_sa:N').transform_calculate(
+        avg_sa="'$'+round(datum.avg) + 'K'"
+    ).properties(title=alt.TitleParams(text='Avg Salary', align='left'))
     salary = ranked_text.encode(text='salary:N').properties(title=alt.TitleParams(text='Salary Estimate', align='left'))
     skill = ranked_text.encode(text='skills:N').properties(title=alt.TitleParams(text='Skill', align='left'))
     row_text = alt.hconcat(ind,job_title,company,avg_s,salary,skill) # Combine data tables
@@ -239,7 +265,7 @@ elif add_selectbox == 'Industry and Company visualizations':
     skills=(skill_chart.add_selection(brush)+skill_text).properties(
         title=alt.TitleParams('Top Skills in 2021',fontSize=20,
                               subtitle='Select one or more skills'),
-        width=550,
+        width=450,
         height=400
     )
     top=(alt.layer(error_bar,point_chart,top_industries_1,points).resolve_legend(
@@ -249,7 +275,7 @@ elif add_selectbox == 'Industry and Company visualizations':
         y = 'independent'
     ).properties(
         title=alt.TitleParams(text=['Salary difference ','with top industries'], align='center',fontSize=15),
-        width=550,
+        width=450,
         height=400
     )+top_industries_text).resolve_scale(
         size="independent",
