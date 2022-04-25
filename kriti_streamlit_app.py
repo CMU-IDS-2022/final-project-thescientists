@@ -126,7 +126,7 @@ elif add_selectbox == 'Industry and Company visualizations':
 
     error_bar=top_industries.mark_errorbar(opacity=0.4, color='darkgreen').encode(
     alt.Y('max_sal:Q', 
-          axis=alt.Axis(title='Salary difference (in $1000)',domain=False,
+          axis=alt.Axis(title='Average Salary (in $1000)',domain=False,
                         tickSize=0, labelPadding=3, format='.0f'),scale=alt.Scale(zero=False)),
     alt.Y2('min_sal:Q'),
     strokeWidth=alt.value(2)
@@ -274,7 +274,7 @@ elif add_selectbox == 'Industry and Company visualizations':
         size="independent",
         y = 'independent'
     ).properties(
-        title=alt.TitleParams(text=['Salary difference ','with top industries'], align='center',fontSize=15),
+        title=alt.TitleParams(text=['Average Salary','of top 20 industries'], align='center',fontSize=15),
         width=450,
         height=400
     )+top_industries_text).resolve_scale(
