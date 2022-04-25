@@ -178,7 +178,7 @@ elif add_selectbox == 'Industry and Company visualizations':
     ).transform_calculate(
         avg_text="round(datum.avg_salary1) + 'K'"
     ).properties(
-        title=alt.TitleParams(['Average salary (K):'],fontSize=20),
+        title=alt.TitleParams(['Average salary:'],fontSize=20),
         width=40,
         height=40
     )
@@ -195,7 +195,7 @@ elif add_selectbox == 'Industry and Company visualizations':
     ).transform_calculate(
         low_text="round(datum.low_salary) + 'K'"
     ).properties(
-        title=alt.TitleParams(['Minimum salary (K):'],fontSize=20),
+        title=alt.TitleParams(['Minimum salary:'],fontSize=20),
         width=40,
         height=40
     )
@@ -211,7 +211,7 @@ elif add_selectbox == 'Industry and Company visualizations':
     ).transform_calculate(
         up_text="round(datum.up_salary) + 'K'"
     ).properties(
-        title=alt.TitleParams(['Maximum salary (K):'],fontSize=20),
+        title=alt.TitleParams(['Maximum salary:'],fontSize=20),
         width=40,
         height=40
     )
