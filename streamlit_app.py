@@ -1118,16 +1118,17 @@ elif add_selectbox == 'Job Recommendation Dashboard':
     def data_filter_dashboard(df, code_state_dict, skill_to_col_dict, state, salary_range, skills, industry):
         labels = pd.Series([1] * len(df), index=df.index)
 
+        if skills:
+            for skill in skills:
+                labels |= df[skill_to_col_dict[skill]] == 1
+
         if salary_range is not None:
             labels &= df['Lower Salary'] >= (salary_range[0] / 1000)
             labels &= df['Upper Salary'] <= (salary_range[1] / 1000)
 
         if state is not None and state != 'All':
+            #st.write(get_code_for_state(state, code_state_dict))
             labels &= df['Job Location'] == get_code_for_state(state, code_state_dict)
-
-        if skills:
-            for skill in skills:
-                labels &= df[skill_to_col_dict[skill]] == 1
 
         if industry and industry != 'All':
             labels &= df['Industry'] == industry
