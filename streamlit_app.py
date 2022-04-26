@@ -27,6 +27,7 @@ def load_data():
 if add_selectbox == 'US Data Science Jobs visualizations':
     ####################################################################################################################
 
+
     def load_ds_salary_data():
         # Removing index column:
         # ds_data = pd.read_csv("Final_Salary.csv", index_col=[0])
@@ -49,31 +50,26 @@ if add_selectbox == 'US Data Science Jobs visualizations':
 
     st.markdown('## Number of Data Science Roles Available')
     st.write(
-        'Below visualization shows the number of jobs available in various states in the United States. '
-        'Users will have the ability to interact with the chart. They will be able to see a specific location '
-        'and understand the job opportunities available.')
+        'Below visualization shows the number of jobs available in various states in the United States. Users will have the ability to interact with the chart. They will be able to see a specific location and understand the job opportunities available.')
 
     # Number of Jobs in United States:
     with st.spinner(text="Loading data..."):
         jobs = load_no_of_jobs_data()
 
-    # st.header("Sample Dataset")
-    # st.write("Click on the checkbox to see the data for DS roles")
-    # if st.checkbox('Show Data Science Roles Data'):
-    #     selected_rows1 = jobs[~jobs.isnull()]
-    #     st.dataframe(selected_rows1.head(5))
+    #st.header("Sample Dataset")
+    #st.write("Click on the checkbox to see the data for DS roles")
+    #if st.checkbox('Show Data Science Roles Data'):
+        # selected_rows1 = jobs[~jobs.isnull()]
+        # st.dataframe(selected_rows1.head(5))
 
-    # st.header("Interactive Graph")
+    #st.header("Interactive Graph")
     #if st.checkbox('Show the graph role count '):
         st.write(
-            'The graph has been colored according to the Maximum Salary offered in various states. '
-            'Feel free to choose the company name along with the job type to see various combinations of '
-            'availability. Choose both All in the dropdown to see all the points on the map.')
+            'The point has been colored according to the Maximum Salary offered in various states. Feel free to choose the company name along with the job type to see various combinations of availability. Choose both All in the dropdown to see all the points on the map.')
 
         job_type = list(jobs['Job_Type'].unique()) + [None]
 
         company_names = list(jobs['Company'].unique()) + [None]
-        st.write(company_names)
         # company_names.insert(1, 'All')
 
         # input_dropdown_job = alt.binding_select(options=job_type, name='Job Type')
@@ -302,24 +298,23 @@ if add_selectbox == 'US Data Science Jobs visualizations':
 
         st.altair_chart(background + job_type_points)
 
-
     st.markdown('## Data Scientist Salary Statistics Across the United States')
     st.write(
         'Below visualization shows the minimum, maximum and average salaries for various states in the United States.')
     # Min max avg salary:
     with st.spinner(text="Loading data..."):
-    #     onlyDS = load_ds_salary_data()
-    #
-    #     st.header("Sample Dataset")
-    #     st.write("Click on the checkbox to see the data for min max avg salary")
-    #     if st.checkbox('Show Min Max Avg Data'):
-    #         selected_rows = onlyDS[~onlyDS.isnull()]
-    #         st.dataframe(selected_rows.head(5))
-
-        # Code starts from here for the interactive graphs
+        # onlyDS = load_ds_salary_data()
+        #
+        # st.header("Sample Dataset")
+        # st.write("Click on the checkbox to see the data for min max avg salary")
+        # # if st.checkbox('Show Min Max Avg Data'):
+        # #     selected_rows = onlyDS[~onlyDS.isnull()]
+        # #     st.dataframe(selected_rows.head(5))
+        #
+        # # Code starts from here for the interactive graphs
         # st.header("Interactive Graphs")
 
-    #if st.checkbox('Show the graph for Salaries'):
+        # if st.checkbox('Show the graph for Salaries'):
         onlyDS_data = load_ds_salary_data()[
             ['Maximum Salary', 'Job Location', 'usa_state_latitude', 'usa_state_longitude', 'Job Title',
              'Minimum Salary', 'Average Salary', 'State', 'id', 'STATE_NAME']]
