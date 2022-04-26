@@ -1154,7 +1154,7 @@ elif add_selectbox == 'Job Recommendation Dashboard':
 
     st.title('Job Recommendation Dashboard')
 
-    st.markdown('#### Filter Data Science roles in you preferred US State base don you expected Salary, Skills and preferred Industry of work')
+    st.markdown('#### Filter Data Science roles in you preferred US State based on you expected Salary, Skills and preferred Industry of work')
 
     dataset = load_data()
     dataset = dataset.drop_duplicates()
