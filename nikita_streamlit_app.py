@@ -83,7 +83,8 @@ elif add_selectbox == 'Industry and Company visualizations':
 
     # CHART 2 - grouped salaries, industry wise
     with st.spinner(text="Loading data..."):
-        df2 = load_data("https://raw.githubusercontent.com/CMU-IDS-2022/final-project-thescientists/main/datasets/DataScientiestsSalaries2021Cleaned.csv")
+        df2 = load_data(
+            "C:/Users/Nikita/Downloads/final-project-thescientists-main/final-project-thescientists-main/datasets/DataScientiestsSalaries2021Cleaned.csv")
     st.header("Data Roles Salaries in the US")
 
     # REFERENCE - https://stackoverflow.com/questions/62315591/altair-select-all-values-when-using-binding-select
@@ -118,6 +119,7 @@ elif add_selectbox == 'Industry and Company visualizations':
     st.write(
         "Now lets look at the companies in the selected industry along with the salary range they offer. Zoom in to see the whole thing!")
 
+    #Source: https://altair-viz.github.io/gallery/top_k_items.html
     salaryBubbles = alt.Chart(industry_df).transform_filter(industry_brush).mark_point(filled=True).encode(
         alt.X('Avg Salary(K):Q'),
         alt.Y('Company Name:N'),
@@ -126,12 +128,12 @@ elif add_selectbox == 'Industry and Company visualizations':
         tooltip=[alt.Tooltip('job_title_sim', title="Job Role"), alt.Tooltip('Avg Salary(K)'),
                  alt.Tooltip('Company Name'), alt.Tooltip('Location')]
     ).transform_window(
-        rank="rank(Avg Salary(K):Q)",
+        rank="rank(Avg Salary(K))",
         sort=[
-            alt.SortField("Avg Salary(K):Q", order="descending"),
-        ],
+            alt.SortField("Avg Salary(K)", order="descending"),
+        ]
     ).transform_filter(
-        'datum.rank < 30'
+        (alt.datum.rank <= 30)
     ).interactive().add_selection(industry_brush)
 
     if st.checkbox('Show Average Salaries for Companies in This Industry'):
@@ -145,6 +147,13 @@ elif add_selectbox == 'Industry and Company visualizations':
         tooltip=['Company Name', 'Rating', 'Avg Salary(K)']
     ).properties(
         width=170
+    ).transform_window(
+        rank="rank(Avg Salary(K))",
+        sort=[
+            alt.SortField("Avg Salary(K)", order="descending"),
+        ]
+    ).transform_filter(
+        (alt.datum.rank <= 30)
     ).interactive().add_selection(industry_brush)
 
     if st.checkbox('Show Employee Ratings for Companies in This Industry'):
@@ -159,7 +168,12 @@ elif add_selectbox == 'Industry and Company visualizations':
     ).properties(
         width=170
     ).transform_window(
-        rank='rank(Avg Salary(K))'
+        rank="rank(Avg Salary(K))",
+        sort=[
+            alt.SortField("Avg Salary(K)", order="descending"),
+        ]
+    ).transform_filter(
+        (alt.datum.rank <= 30)
     ).add_selection(industry_brush)
 
     if st.checkbox('Show Employee Ratings for Selected Salaries'):
