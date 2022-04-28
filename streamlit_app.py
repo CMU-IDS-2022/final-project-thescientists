@@ -855,8 +855,8 @@ elif add_selectbox == 'Industry and Company visualizations':
     )
 
     # https://stackoverflow.com/questions/67997825/python-altair-generate-a-table-on-selection
-    new_df = df_new.groupby(['s_no', 'Job Title', 'Salary Estimate', 'Avg Salary(K)', 'Company Name'])['Skill'].apply(
-        ','.join).reset_index()
+    new_df = df_new.groupby(['s_no', 'Job Title', 'Industry', 'Salary Estimate', 'Avg Salary(K)', 'Company Name'])[
+        'Skill'].apply(','.join).reset_index()
     new_df.rename(columns={'Skill': 'skill_name'}, inplace=True)
     new_df = new_df.drop_duplicates(subset=['s_no'], keep="first")
 
@@ -873,6 +873,7 @@ elif add_selectbox == 'Industry and Company visualizations':
     ).transform_aggregate(
         groupby=["s_no"],
         job_title="min(Job Title)",
+        indus="min(Industry)",
         avg="min(Avg Salary(K))",
         company="min(Company Name)",
         salary="min(Salary Estimate)",
@@ -895,9 +896,10 @@ elif add_selectbox == 'Industry and Company visualizations':
     avg_s = ranked_text.encode(text='avg_sa:N').transform_calculate(
         avg_sa="'$'+round(datum.avg) + 'K'"
     ).properties(title=alt.TitleParams(text='Avg Salary', align='left'))
+    indstry = ranked_text.encode(text='indus:N').properties(title=alt.TitleParams(text='Industry', align='left'))
     salary = ranked_text.encode(text='salary:N').properties(title=alt.TitleParams(text='Salary Estimate', align='left'))
     skill = ranked_text.encode(text='skills:N').properties(title=alt.TitleParams(text='Skill', align='left'))
-    row_text = alt.hconcat(ind, job_title, company, avg_s, salary, skill)  # Combine data tables
+    row_text = alt.hconcat(ind, job_title, indstry, company, avg_s, salary, skill)  # Combine data tables
 
     skills = (skill_chart.add_selection(brush) + skill_text).properties(
         title=alt.TitleParams('Top Skills in 2021', fontSize=20,
