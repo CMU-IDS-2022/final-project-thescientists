@@ -1,3 +1,4 @@
 st-annotated-text
 vega_datasets
 pdfplumber
+en_core_web_sm

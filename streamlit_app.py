@@ -10,6 +10,7 @@ import requests
 import json
 import re
 import pdfplumber
+import en_core_web_sm
 
 st.set_page_config(layout="wide", page_title='Data Science Job Market Visualizer')
 
@@ -583,7 +584,7 @@ elif add_selectbox == 'Industry and Company visualizations':
     with st.spinner(text="Loading data..."):
         df2 = load_cleaned_data(
             "https://raw.githubusercontent.com/CMU-IDS-2022/final-project-thescientists/main/datasets/DataScientiestsSalaries2021Cleaned.csv")
-    st.markdown("## Salaries for Data Roles in by Industry")
+    st.markdown("## Salaries for Data Roles by Industry")
 
     # REFERENCE - https://stackoverflow.com/questions/62315591/altair-select-all-values-when-using-binding-select
     industry_list = list(df2['Sector'].unique()) + [None]
@@ -950,8 +951,8 @@ elif add_selectbox == 'Job Recommendation Dashboard':
     ####################################################################################################################
 
     api_key = st.secrets["api_key"]
-    client_id = st.secrets["client_id"]
-    secret = st.secrets["secret"]
+    # client_id = st.secrets["client_id"]
+    # secret = st.secrets["secret"]
 
     filepath_state_code_dict = '/app/final-project-thescientists/datasets/dicts/states_to_codes.txt'
     filepath_state_fips_dict = '/app/final-project-thescientists/datasets/dicts/state_to_fips.txt'
@@ -970,15 +971,15 @@ elif add_selectbox == 'Job Recommendation Dashboard':
         return (matched / total_key_words), annotated_input
 
 
-    def get_emi_api_token():
-        url = "https://auth.emsicloud.com/connect/token"
-
-        payload = "client_id=" + client_id + "&client_secret=" + secret + "&grant_type=client_credentials&scope=emsi_open"
-        headers = {'Content-Type': 'application/x-www-form-urlencoded'}
-
-        response = requests.request("POST", url, data=payload, headers=headers)
-        token = json.loads(response.text)['access_token']
-        return token
+    # def get_emi_api_token():
+    #     url = "https://auth.emsicloud.com/connect/token"
+    #
+    #     payload = "client_id=" + client_id + "&client_secret=" + secret + "&grant_type=client_credentials&scope=emsi_open"
+    #     headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+    #
+    #     response = requests.request("POST", url, data=payload, headers=headers)
+    #     token = json.loads(response.text)['access_token']
+    #     return token
 
 
     @st.cache
@@ -1002,42 +1003,37 @@ elif add_selectbox == 'Job Recommendation Dashboard':
         return key_words
 
 
-    def extract_skills_from_document(jd):
-        token = get_emi_api_token()
-        jd = jd.replace('\n', " ").replace('\t', " ")
-        jd = re.sub(r'[^A-Za-z0-9 ]+', '', jd)
+    # def extract_skills_from_document(jd):
+    #     token = get_emi_api_token()
+    #     jd = jd.replace('\n', " ").replace('\t', " ")
+    #     jd = re.sub(r'[^A-Za-z0-9 ]+', '', jd)
+    #
+    #     print("JD: {}".format(jd))
+    #
+    #     skills_from_doc_endpoint = "https://emsiservices.com/skills/versions/latest/extract"
+    #     text = jd
+    #     confidence_interval = "0.8"
+    #     payload = "{ \"text\": \"... " + text + " ...\", \"confidenceThreshold\": " + confidence_interval + " }"
+    #
+    #     headers = {
+    #         'authorization': "Bearer " + token,
+    #         'content-type': "application/json"
+    #     }
+    #
+    #     response = requests.request("POST", skills_from_doc_endpoint, data=payload.encode('utf-8'), headers=headers)
+    #
+    #     skills_found_in_document_df = pd.DataFrame(pd.json_normalize(response.json()['data']));
+    #     skills_found_in_document_df = rename_columns(skills_found_in_document_df)
+    #
+    #     skills_list = list(skills_found_in_document_df['skill_name'])
+    #
+    #     return skills_list
 
-        print("JD: {}".format(jd))
-
-        skills_from_doc_endpoint = "https://emsiservices.com/skills/versions/latest/extract"
-        text = jd
-        confidence_interval = "0.8"
-        payload = "{ \"text\": \"... " + text + " ...\", \"confidenceThreshold\": " + confidence_interval + " }"
-
-        headers = {
-            'authorization': "Bearer " + token,
-            'content-type': "application/json"
-        }
-
-        response = requests.request("POST", skills_from_doc_endpoint, data=payload.encode('utf-8'), headers=headers)
-
-        skills_found_in_document_df = pd.DataFrame(pd.json_normalize(response.json()['data']));
-        skills_found_in_document_df = rename_columns(skills_found_in_document_df)
-
-        skills_list = list(skills_found_in_document_df['skill_name'])
-
-        # skills_list = ['Predictive Modeling', 'Business Continuity Planning', 'Exploratory Data Analysis',
-        #                'Data Collection', 'Analytical Skills', 'Data Mining', 'Distributed Computing', 'Unstructured Data',
-        #                'Security Awareness', 'Data Architecture', 'Customer Retention', 'Phishing',
-        #                'Python (Programming Language)', 'Dashboard', 'Support Vector Machine', 'Data Science', 'D3.js',
-        #                'Machine Learning Algorithms', 'Machine Learning', 'Random Forest Algorithm', 'Financial Data',
-        #                'Gradient Boosting', 'Statistical Modeling', 'SQL (Programming Language)', 'Data Modeling',
-        #                'SAS (Software)', 'Query Languages', 'Budget Support', 'Data Visualization', 'Matplotlib',
-        #                'Apache Hive', 'Social Engineering', 'Computer Science', 'Big Data Analytics', 'Big Data',
-        #                'Forecasting', 'Data Warehousing', 'Apache Spark', 'Statistics', 'Microsoft Excel',
-        #                'R (Programming Language)', 'Mathematical Optimization']
-
-        return skills_list
+    def get_JD_keywords(jd):
+        nlp = en_core_web_sm.load()
+        doc = nlp(jd)
+        key_words = [str(x).lower() for x in doc.ents]
+        return key_words
 
 
     @st.cache
@@ -1312,7 +1308,10 @@ elif add_selectbox == 'Job Recommendation Dashboard':
         # st.markdown("**Preferred Skills/Proficiencies by Recruiter according to Job Description:**")
         # st.markdown(extract_skills_from_document(sel_job_data['Job Description']))
 
-        skills_list = extract_skills_from_document(sel_job_data['Job Description'])
+        # skills_list = extract_skills_from_document(sel_job_data['Job Description'])
+
+        skills_list = get_JD_keywords(sel_job_data['Job Description'])
+
         key_words_updated = extract_key_words(skills_list)
 
         uploaded_file = st.file_uploader("Upload your Resume to analyze match with Job Description:")
