@@ -1,7 +1,8 @@
 # Final Project Report: Data Science Job Market Visualizer
 
 Project URL: https://share.streamlit.io/cmu-ids-2022/final-project-thescientists/main 
-Video URL: TODO
+
+Video URL: https://github.com/CMU-IDS-2022/final-project-thescientists/blob/main/pics/final/final_project_video.mp4
 
 
 
@@ -200,3 +201,15 @@ First, The primary dataset used for giving shape to our visualizations was web s
 Another improvement that can make our dashboard more meaningful is improving the Resume Matching Algorithm and Keyword Extraction Algorithm. For the keyword extraction, we compared two approaches. The Spacy Language Model, which is open source, and EMSI Skills API, which is not open access but uses power NLP to extract all skills the job description contains. We believe that given sufficient time we could have improved our use of the Spacy Language Model better by tuning the model's parameters to improve keyword extraction. For the Resume Matching Algorithm, we have currently only implemented a one-to-one String matching approach. The keywords from the job description and the text from the User's resume can be lemmatized to improve the matching score algorithm, which currently fails to account for the base form of words. 
 
 We believie that this tool has the potential to help Data Scientists make informed decisions and can be extended to include other job roles like Software Developers, Product Managers, etc. Our tool can also be integrated with job search portals like- Glassdoor, Indeed and LinkedIn and can improve a User's job search process by helping them make informed decisions.
+
+## References
+
+1. [Abrosimova, K. (2021, October 12). How Can You Build and Monetize a Job Aggregator? 7 Business Models Beyond PPC. Steelkiwi.](https://steelkiwi.com/blog/how-can-you-build-and-monetize-a-job-aggregator-7-business-models-beyond-ppc/)
+1. [Colson, C. (2022, April 4). Data Science Job Boards Roundup. Dataspace.](https://dataspace.com/data-job-seekers/data-science-job-boards/)
+1. [United States state FIPS codes](https://www.nrcs.usda.gov/wps/portal/nrcs/detail/?cid=nrcs143_013696)
+1. [Maps in Altair (colored based on variables)](https://firas.moosvi.com/courses/2020_WT2/data551/class/4-maps-deployment.html)
+1. [Choropleth graph](https://altair-viz.github.io/gallery/choropleth.html)
+1. [Map references in Altair](https://colab.research.google.com/github/altair-viz/altair-tutorial/blob/master/notebooks/09-Geographic-plots.ipynb)
+1. [Cost of Living Index](https://meric.mo.gov/data/cost-living-data-series)
+1. [EMSI Skills API](https://skills.emsidata.com/)
+1. [Keyword extraction in Python with NLP](https://towardsdatascience.com/keyword-extraction-process-in-python-with-natural-language-processing-nlp-d769a9069d5c)
