@@ -147,7 +147,7 @@ The top data science skill by job count in Aerospace and Defense and HealthCare 
 
 The visualization also has the job listings, in descending order of average salaries, once again filtered by skill:
 
-![Skills Interactive chart](./pics/final/dashboard2/skills/mongo_comparision.gif)
+![Skills Interactive chart](./pics/final/dashboard2/skills/mongo_comparison.gif)
 
 As seen in the above GIF, another interesting observation is that of the jobs requiring Mongo; the job listing ranked 10 has a lower average and minimum salary than the one ranked nine but has a higher maximum salary. It also requires fewer skills of the applicant than the one ranked 9. This means that a job seeker can negotiate for higher pay for a job with fewer skills!
 
