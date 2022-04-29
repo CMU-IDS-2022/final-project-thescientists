@@ -3,7 +3,7 @@
 Project URL: https://share.streamlit.io/cmu-ids-2022/final-project-thescientists/main 
 Video URL: TODO
 
-Abstract
+
 
 ## Introduction
 
@@ -134,41 +134,41 @@ While there is no shortage of employment websites, we noticed that hard skills w
 
 Therefore, our main chart in this visualization is the most sought-after skills, filtered by industry and ordered by job count. It also displays the mean, maximum and minimum salary averages in the selected industry/sector and can be screened for multiple skills.
 
-![Skills Interactive chart](./pics/final/dashboard2/skills/sal_ratings.gif)
+![Skills Interactive chart](./pics/final/dashboard2/skills/main_chart.gif)
 
 In addition to providing a summary of salary statistics across the selected industries, the user can view the chart on the right to see the top 15 industries for said skill by average salary. This gives an excellent comparison to the user, as the same skill may be valued differently across industries, which reflects in the number of jobs that require the skill and the pay scale for said jobs.
 
 An interesting observation this visualization enabled us to make is shown in the GIF below: 
 
-![Skills Interactive chart](./pics/final/dashboard2/skills/sal_ratings.gif)
+![Skills Interactive chart](./pics/final/dashboard2/skills/skill_industry_tooltip.gif)
 
 The top data science skill by job count in Aerospace and Defense and HealthCare Services is SQL, and the average salary for jobs that offer the same is $87,000. In contrast, the Health, Beauty & Fitness industry has an average salary of $140,000 and a maximum salary of $171,000, which is much higher than selected industries. However, the tooltip shows that it only has a single job listing with said salary than 27 job listings in the selected industries. This will help job seekers monetarily measure how lucrative their skills are and where.
 
 The visualization also has the job listings, in descending order of average salaries, once again filtered by skill:
 
-![Skills Interactive chart](./pics/final/dashboard2/skills/sal_ratings.gif)
+![Skills Interactive chart](./pics/final/dashboard2/skills/mongo_comparision.gif)
 
 As seen in the above GIF, another interesting observation is that of the jobs requiring Mongo; the job listing ranked 10 has a lower average and minimum salary than the one ranked nine but has a higher maximum salary. It also requires fewer skills of the applicant than the one ranked 9. This means that a job seeker can negotiate for higher pay for a job with fewer skills!
 
 By making the skills front and center, we plan to make it easier to bridge the gap in desired skills between the industry and employment seeker to make it easier to understand the requirements of a job market, and enable the user to compare across industries and companies to arrive at a decision based on where they can find more opportunities, and feel more valued.
 
-Data Analysis: We used data wrangling to filter and plot the desired values in this visualization. Each listed skill has a column of its own in the dataset with boolean entries indicating whether the job listing requires the skill. We used pandas melt to flatten the data frame to plot the top 15 industries and the top job listings for each skill. Finally, we used mark_text to show the metrics and listings combined with transform_lookup and transform_window and error bars to plot the salary statistics in Altair, all linked to the main bar chart.
+_Data Analysis:_ We used data wrangling to filter and plot the desired values in this visualization. Each listed skill has a column of its own in the dataset with boolean entries indicating whether the job listing requires the skill. We used pandas melt to flatten the data frame to plot the top 15 industries and the top job listings for each skill. Finally, we used mark_text to show the metrics and listings combined with transform_lookup and transform_window and error bars to plot the salary statistics in Altair, all linked to the main bar chart.
 
 
 #### Data Science job recommendation dashboard
 
 After analyzing data on the best States and cities to work in and getting a clear idea of the industries and companies to prefer, We would like to guide our User to apply for Data Science roles where he would be a good fit. This can be accomplished by providing the User with a filtered list of job roles that satisfy the User's preferences. Based on the features available in our dataset, We decided to include the below variables for users to filter job roles available in the US:
 
-Preferred US State to Work from: 
+_Preferred US State to Work from:_ 
 A user's choice of State can depend on many factors, like- family, weather, State and Local Taxes, company location across the US, etc. This option provided the User the ability to localize his search significantly.
 
-Expected Salary Range: 
+_Expected Salary Range:_
 After analyzing the 'United States Salary Equalizer', which normalizes the salaries across US states based on the Cost of Living Index, The User can make an informed expectation on the salary range in his preferred US State. 
 
-User's Skills:
+_User's Skills:_
 The salary of a Data Scientist can vary widely based on their proficiency in tools and techniques to analyze and build analytic models from data. The User can filter job roles that prefer applicants based on their skills, and the filtered results can help the user gauge the strength of his profile based on the skills he is proficient in. For example, a user only proficient in SQL might have access to limited opportunities compared to someone skilled in Python.
 
-Industry/Sector of Work:
+_Industry/Sector of Work:_
 A Data Science aspirant's preferred work industry/sector is an essential indicator of job satisfaction. Since Data Science is a multidisciplinary field, it will provide the User a considerable advantage in finding jobs in the industry/sector where they possess prior domain expertise.
 
 User input selections for the above parameters are used to filter our dataset and get a list of job roles that satisfy the User's preferred State, Expected Salary Range, Skills, and Industry. After obtaining the filtered dataset, we further aim to guide the User to filter down available job roles from the State level to the City level. To achieve this, we implement a scatter plot of coordinate points of job roles available in the cities on the backdrop of the User's preferred State. We further support this geographic plot by summarizing the spread of salaries for Data Science roles within each of these cities. This is implemented using a grouped error-bar chart where the points represent the Average Salary of job roles in each city. 
