@@ -1227,7 +1227,7 @@ elif add_selectbox == 'Job Recommendation Dashboard':
         # generate the error bars
         errorbars = base.mark_errorbar().encode(
             x="Location",
-            y="Lower Salary",
+            y=alt.Y('Lower Salary', title='Salary Spread'),
             y2="Upper Salary",
             color=alt.Color("Location"),
             tooltip=['Location:N', 'Average Salary:Q', 'Lower Salary:Q', 'Upper Salary:Q']
